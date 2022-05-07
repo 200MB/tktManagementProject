@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+            prefWidth="600.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="FxmlControllers.EntryPoint" >
+   <Label alignment="CENTER" layoutX="197.0" layoutY="67.0" prefHeight="36.0" prefWidth="206.0"
+          style="-fx-text-fill: gray;" text="Login">
+      <font>
+         <Font name="SansSerif Regular" size="20.0"/>
+      </font>
+      <effect>
+         <Glow level="0.32"/>
+      </effect>
+   </Label>
+   <TextField fx:id="LoginEmail" layoutX="197.0" layoutY="115.0" prefHeight="25.0" prefWidth="206.0"
+              promptText="Email"/>
+   <TextField fx:id="LoginPassword" layoutX="197.0" layoutY="153.0" prefHeight="25.0" prefWidth="206.0"
+              promptText="Password"/>
+   <Button fx:id="LoginBtn" layoutX="273.0" layoutY="194.0" mnemonicParsing="false"
+           style="-fx-background-color: #ADD8E6;" text="Login" onAction="#onLoginPressed">
+      <font>
+         <Font name="Segoe UI" size="14.0"/>
+      </font>
+   </Button>
+   <Line endX="230.66668701171875" fill="#9e9b9b" layoutX="298.0" layoutY="250.0" startX="-207.33334350585938"
+         stroke="#a8a8a8"/>
+   <Label alignment="CENTER" layoutX="197.0" layoutY="273.0" prefHeight="36.0" prefWidth="206.0"
+          style="-fx-text-fill: gray;" text="Sign-Up">
+      <font>
+         <Font name="SansSerif Regular" size="18.0"/>
+      </font>
+      <effect>
+         <Glow level="0.32"/>
+      </effect>
+   </Label>
+   <TextField fx:id="RegEmail" layoutX="197.0" layoutY="361.0" prefHeight="25.0" prefWidth="206.0" promptText="Email"/>
+   <TextField fx:id="RegPassword" layoutX="197.0" layoutY="405.0" prefHeight="25.0" prefWidth="206.0"
+              promptText="Password"/>
+   <TextField fx:id="RegName" layoutX="197.0" layoutY="316.0" prefHeight="25.0" prefWidth="206.0" promptText="Name"/>
+   <Button fx:id="RegBtn" layoutX="265.0" layoutY="444.0" mnemonicParsing="false" style="-fx-background-color: #ADD8E6;"
+           text="sign-up" onAction="#onRegPressed">
+      <font>
+         <Font name="Segoe UI" size="14.0"/>
+      </font>
+   </Button>
+   <Label fx:id="hdnLabelLogin" alignment="CENTER" layoutX="332.0" layoutY="190.0" prefHeight="36.0" prefWidth="206.0"
+          text="Incorrect name/password" textFill="#bcb339" visible="false">
+      <font>
+         <Font name="SansSerif Regular" size="13.0"/>
+      </font>
+      <effect>
+         <Glow level="0.32"/>
+      </effect>
+   </Label>
+   <Label fx:id="hdnLabelReg" alignment="CENTER" layoutX="310.0" layoutY="440.0" prefHeight="36.0" prefWidth="206.0"
+          style="-fx-text-fill: gray;" text="email already exists" textFill="#bcb339" visible="false">
+      <font>
+         <Font name="SansSerif Regular" size="13.0"/>
+      </font>
+      <effect>
+         <Glow level="0.32"/>
+      </effect>
+   </Label>
+</AnchorPane>
