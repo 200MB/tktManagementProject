@@ -36,21 +36,17 @@ public class EntryPoint {
     @FXML
     public void onLoginPressed() throws IOException {
         Stage stage = (Stage) LoginBtn.getScene().getWindow();
-        Parent parent;
 
         String email = LoginEmail.getText();
         String password = LoginPassword.getText();
         if (EntrySearch.exists(email, password)) {
             hdnLabelLogin.setVisible(false);
             if (EntrySearch.getID(email) == 1) {
-                parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AdminInterface.fxml")));
+                openAdminInterface(stage);
             } else {
-                parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/UserInterface.fxml")));
+                generateUserInterface(stage);
             }
-            Scene scene = new Scene(parent);
-            stage.setScene(scene);
-            stage.setMaximized(true);
-            stage.show();
+
         } else {
             hdnLabelLogin.setVisible(true);
         }
@@ -61,14 +57,26 @@ public class EntryPoint {
         String email = RegEmail.getText();
         String password = RegPassword.getText();
         String name = RegName.getText();
-        if (!EntrySearch.exists(email)) {
+        if (!EntrySearch.exists(email) && email.length() > 0 && password.length() > 0 && name.length() > 0) {
             hdnLabelReg.setText("Successfully registered!");
             hdnLabelReg.setVisible(true);
             DataBase.addUser(name, email, password);
         } else {
-            hdnLabelReg.setText("email already exists");
+            hdnLabelReg.setText("email already exists / fields are missing");
             hdnLabelReg.setVisible(true);
         }
+    }
+
+    private void generateUserInterface(Stage stage) {
+
+    }
+
+    private void openAdminInterface(Stage stage) throws IOException {
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AdminInterface.fxml")));
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.show();
     }
 
 

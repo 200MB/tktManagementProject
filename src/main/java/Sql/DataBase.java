@@ -14,4 +14,8 @@ public class DataBase {
         Initialization.connection.prepareStatement("DELETE FROM `tkt`.`users` WHERE (`email` = '%s');".formatted(email)).execute();
         System.out.println("DEBUG: REMOVED USER");
     }
+
+    public static boolean hallExists(String name) throws SQLException {
+        return Initialization.connection.prepareStatement("SELECT * FROM `tkt`.`moviehalls` WHERE NAME = \"%s\"".formatted(name)).executeQuery().next();
+    }
 }

@@ -54,5 +54,25 @@ public class Initialization {
                     """).execute();
             System.out.println("DEBUG: CREATED TABLE TICKETHISTORY");
         }
+        if (tableCheck("moviehalls")){
+            connection.prepareStatement("""
+                    CREATE TABLE `tkt`.`moviehalls` (
+                      `idmoviehalls` INT NOT NULL AUTO_INCREMENT,
+                      `name` VARCHAR(45) NULL,
+                      `seats` VARCHAR(45) NULL,
+                      PRIMARY KEY (`idmoviehalls`));""").execute();
+            System.out.println("DEBUG: CREATED TABLE MOVIEHALLS");
+        }
+        if (tableCheck("prices")){
+            connection.prepareStatement("""
+                    CREATE TABLE `tkt`.`prices` (
+                      `idofmovie` VARCHAR(45) NOT NULL,
+                      `nameofhall` VARCHAR(45) NOT NULL,
+                      `price` VARCHAR(45) NOT NULL,
+                      `time` VARCHAR(45) NOT NULL);
+                    """).execute();
+            System.out.println("DEBUG: CREATED TABLE PRICES");
+        }
+
     }
 }
