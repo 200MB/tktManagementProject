@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import java.beans.JavaBean;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TktJson {
 
@@ -21,7 +22,6 @@ public class TktJson {
         JSONParser parser = new JSONParser();
         try {
             reader = new BufferedReader(new FileReader("src/main/resources/MoviesJson"));
-            jsonArr = new ArrayList<>();
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.length() == 0) continue;
@@ -34,6 +34,11 @@ public class TktJson {
             e.printStackTrace();
         }
         return jsonArr;
+    }
+
+    //movies that can be viewed to user interface
+    public static ArrayList<JSONObject> getJsonListForUsers() {
+        return (ArrayList<JSONObject>) getJsonList().stream().filter(e->e.get("Show").equals("true")).collect(Collectors.toList());
     }
 
     @SuppressWarnings("unchecked")
@@ -70,9 +75,8 @@ public class TktJson {
         writer = new BufferedWriter(new FileWriter("src/main/resources/MoviesJson", true));
         clearFile();
         for (JSONObject obj : arr) {
-            writer.write(obj.toJSONString());
+            writer.append(obj.toJSONString()).append("\n");
         }
-        writer.write("\n");
         writer.close();
     }
 }

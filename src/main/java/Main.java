@@ -1,3 +1,4 @@
+import Json.TktJson;
 import Sql.Initialization;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +14,6 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException, IOException {
         Initialization.startup();
         launch(args);
-
-
     }
 
     @Override

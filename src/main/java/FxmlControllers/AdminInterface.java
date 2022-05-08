@@ -146,11 +146,14 @@ public class AdminInterface {
         }
     }
 
-    public void onPriceBtnPressed() {
+    public void onPriceBtnPressed() throws SQLException {
         if (Arrays.stream(new String[]{PriceMovieID.getText(), PriceTime.getText(),
                 PriceHallName.getText(), Price.getText()}).noneMatch(e -> e.length() == 0)) {
             PriceWarningLabel.setVisible(false);
-
+            Connection con = DriverManager.getConnection(InfoCreds.HOST, InfoCreds.USER, InfoCreds.PASSWORD);
+            con.prepareStatement("INSERT INTO `tkt`.`prices` (`idofmovie`,`nameofhall`,`price`,`time`) VALUES(\"%s\",\"%s\",\"%s\",\"%s\")"
+                    .formatted(PriceMovieID.getText(), PriceHallName.getText(),Price.getText(),PriceTime.getText())).execute();
+            System.out.println("DEBUG: ADDED PRICE TO MOVIE");
         } else {
             PriceWarningLabel.setVisible(true);
         }

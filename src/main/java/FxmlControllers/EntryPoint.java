@@ -32,7 +32,6 @@ public class EntryPoint {
     private Label hdnLabelLogin;
     @FXML
     private Label hdnLabelReg;
-
     @FXML
     public void onLoginPressed() throws IOException {
         Stage stage = (Stage) LoginBtn.getScene().getWindow();
@@ -44,7 +43,7 @@ public class EntryPoint {
             if (EntrySearch.getID(email) == 1) {
                 openAdminInterface(stage);
             } else {
-                generateUserInterface(stage);
+                openUserInterface(stage);
             }
 
         } else {
@@ -67,8 +66,12 @@ public class EntryPoint {
         }
     }
 
-    private void generateUserInterface(Stage stage) {
-
+    private void openUserInterface(Stage stage) throws IOException {
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/UserInterface.fxml")));
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.show();
     }
 
     private void openAdminInterface(Stage stage) throws IOException {
