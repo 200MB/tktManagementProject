@@ -10,7 +10,7 @@ import java.io.*;
 import java.sql.SQLException;
 
 public class Main extends Application {
-
+    //todo:onClickEvent for column,seat page,balance fill
     public static void main(String[] args) throws SQLException, IOException {
         Initialization.startup();
         launch(args);

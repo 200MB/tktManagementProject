@@ -1,5 +1,6 @@
 package Sql;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DataBase {
@@ -17,5 +18,9 @@ public class DataBase {
 
     public static boolean hallExists(String name) throws SQLException {
         return Initialization.connection.prepareStatement("SELECT * FROM `tkt`.`moviehalls` WHERE NAME = \"%s\"".formatted(name)).executeQuery().next();
+    }
+
+    public static ResultSet getPrices(String id) throws SQLException {
+        return Initialization.connection.prepareStatement("SELECT * FROM `tkt`.`prices` WHERE idofmovie = \"%s\"".formatted(id)).executeQuery();
     }
 }

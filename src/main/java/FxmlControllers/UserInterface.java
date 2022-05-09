@@ -1,22 +1,26 @@
 package FxmlControllers;
 
 import Json.TktJson;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserInterface implements Initializable {
@@ -63,6 +67,7 @@ public class UserInterface implements Initializable {
     }
 
     private VBox convertToImage(int count) {
+        
         Label name = new Label();
         name.setText(String.valueOf(arr.get(count).get("Name")));
         name.setTextFill(Paint.valueOf("Yellow"));
@@ -78,8 +83,24 @@ public class UserInterface implements Initializable {
         box.getChildren().add(name);
         box.getChildren().add(view);
         box.setId(String.valueOf(arr.get(count).get("id")));
-
         box.setOnMouseClicked(mouseEvent -> {
+            JSONObject obj = TktJson.getJsonListForUsers().stream().filter(e -> e.get("id").equals(box.getId())).findFirst().get();
+            MoviePage.id = (String) obj.get("id");
+            MoviePage.name = (String) obj.get("Name");
+            MoviePage.desc = (String) obj.get("Description");
+            MoviePage.rating = (String) obj.get("Rating");
+            MoviePage.url = (String) obj.get("Url");
+            Parent parent = null;
+            try {
+                parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MoviePage.fxml")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Stage stage = (Stage) box.getScene().getWindow();
+            Scene scene = new Scene(Objects.requireNonNull(parent));
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.show();
 
         });
         return box;

@@ -1,141 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1220.0" style="-fx-background-color: #0e1118;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FxmlControllers.AdminInterface">
-   <children>
-      <Label alignment="CENTER" layoutX="475.0" layoutY="14.0" prefHeight="17.0" prefWidth="270.0" style="-fx-text-fill: #e77567;" text="Admin configuration" textFill="RED">
-         <font>
-            <Font name="SansSerif Regular" size="26.0" />
-         </font>
-         <effect>
-            <Glow />
-         </effect>
-      </Label>
-      <Label layoutX="36.0" layoutY="90.0" prefHeight="31.0" prefWidth="132.0" text="Upload a movie" textFill="#c8e5e3">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <effect>
-            <Glow />
-         </effect>
-      </Label>
-      <TextField fx:id="UploadName" layoutX="36.0" layoutY="129.0" promptText="name" />
-      <TextField fx:id="UploadImgPath" layoutX="36.0" layoutY="168.0" prefHeight="25.0" prefWidth="229.0" promptText="photoPath" />
-      <TextField fx:id="UploadRating" layoutX="199.0" layoutY="129.0" prefHeight="25.0" prefWidth="83.0" promptText="IMDB rating" />
-      <TextArea fx:id="UploadDesc" layoutX="36.0" layoutY="200.0" prefHeight="181.0" prefWidth="270.0" promptText="description" />
-      <RadioButton fx:id="UploadView" layoutX="315.0" layoutY="282.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="132.0" text="VisibleToUsers" textFill="#4cd370">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </RadioButton>
-      <Button fx:id="UploadBtn" layoutX="315.0" layoutY="351.0" mnemonicParsing="false" onAction="#onUploadBtnPressed" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: green;" text="Upload">
-         <font>
-            <Font name="SansSerif Regular" size="14.0" />
-         </font>
-      </Button>
-      <TextField fx:id="UploadID" layoutX="275.0" layoutY="168.0" prefHeight="25.0" prefWidth="47.0" promptText="ID" />
-      <Label fx:id="UpladWarningLabel" layoutX="332.0" layoutY="173.0" prefHeight="20.0" prefWidth="149.0" text="ID exists / empty field" textFill="#afbfea" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="491.0" layoutY="90.0" prefHeight="31.0" prefWidth="149.0" text="Add a movie hall" textFill="#c8e5e3">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <effect>
-            <Glow />
-         </effect>
-      </Label>
-      <Line endX="4.000030517578125" endY="261.0" layoutX="471.0" layoutY="121.0" startX="4.0" startY="-33.333335876464844" stroke="#f6ff00" />
-      <TextField fx:id="HallName" layoutX="491.0" layoutY="129.0" promptText="HallName" />
-      <TextField fx:id="HallSeats" layoutX="491.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0" promptText="Amount of seats" />
-      <Label layoutX="653.0" layoutY="174.0" text="Ex: 3x3" textFill="#00a1ff" />
-      <Line endX="200.29290771484375" endY="-1.1666717529296875" layoutX="607.0" layoutY="235.0" startX="-133.5" startY="1.52587890625E-5" stroke="#e5ff00" />
-      <Button fx:id="HallAddBtn" layoutX="640.0" layoutY="200.0" mnemonicParsing="false" onAction="#onAddBtnPressed" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: green;" text="Add">
-         <font>
-            <Font name="SansSerif Regular" size="14.0" />
-         </font>
-      </Button>
-      <Label layoutX="491.0" layoutY="240.0" prefHeight="31.0" prefWidth="256.0" text="Remove a movie from database" textFill="#c8e5e3">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <effect>
-            <Glow />
-         </effect>
-      </Label>
-      <TextField fx:id="RemoveID" layoutX="491.0" layoutY="278.0" prefHeight="25.0" prefWidth="47.0" promptText="ID" />
-      <Button fx:id="RemoveBtn" layoutX="633.0" layoutY="303.0" mnemonicParsing="false" onAction="#onRemoveBtnPressed" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: green;" text="Remove">
-         <font>
-            <Font name="SansSerif Regular" size="14.0" />
-         </font>
-      </Button>
-      <Label fx:id="RemoveWarningLabel" layoutX="546.0" layoutY="281.0" prefHeight="20.0" prefWidth="177.0" text="ID not found / empty field" textFill="#afbfea" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="HallWarningLabel" layoutX="645.0" layoutY="132.0" prefHeight="20.0" prefWidth="177.0" text="Hall found \ empty field/s" textFill="#afbfea" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="844.0" layoutY="90.0" prefHeight="31.0" prefWidth="103.0" text="Edit a movie" textFill="#c8e5e3">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <effect>
-            <Glow />
-         </effect>
-      </Label>
-      <TextField fx:id="EditID" layoutX="947.0" layoutY="93.0" prefHeight="25.0" prefWidth="47.0" promptText="ID" />
-      <TextField fx:id="EditName" layoutX="844.0" layoutY="129.0" promptText="name" />
-      <TextField fx:id="EditRating" layoutX="1012.0" layoutY="129.0" prefHeight="25.0" prefWidth="83.0" promptText="IMDB rating" />
-      <TextField fx:id="EditPath" layoutX="844.0" layoutY="161.0" prefHeight="25.0" prefWidth="229.0" promptText="photoPath" />
-      <TextArea fx:id="EditDesc" layoutX="844.0" layoutY="191.0" prefHeight="181.0" prefWidth="270.0" promptText="description" />
-      <Button fx:id="EditBtn" layoutX="1133.0" layoutY="351.0" mnemonicParsing="false" onAction="#onEditBtnPressed" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: green;" text="Edit">
-         <font>
-            <Font name="SansSerif Regular" size="14.0" />
-         </font>
-      </Button>
-      <Line endX="4.000030517578125" endY="261.0" layoutX="804.0" layoutY="120.0" startX="4.0" startY="-33.333335876464844" stroke="#f6ff00" />
-      <Label fx:id="EditWarningLabel" layoutX="1009.0" layoutY="96.0" text="ID not found" textFill="#afbfea" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="EditView" layoutX="1122.0" layoutY="267.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="132.0" text="VisibleToUsers" textFill="#4cd370">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </RadioButton>
-      <Label layoutX="35.0" layoutY="432.0" prefHeight="31.0" prefWidth="170.0" text="Put price on a movie" textFill="#c8e5e3">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <effect>
-            <Glow />
-         </effect>
-      </Label>
-      <TextField fx:id="PriceMovieID" layoutX="35.0" layoutY="463.0" prefHeight="25.0" prefWidth="79.0" promptText="ID of Movie" />
-      <TextField fx:id="PriceHallName" layoutX="36.0" layoutY="498.0" promptText="HallName" />
-      <TextField fx:id="PriceTime" layoutX="205.0" layoutY="498.0" prefHeight="25.0" prefWidth="95.0" promptText="Start-End (time)" />
-      <TextField fx:id="Price" layoutX="205.0" layoutY="463.0" prefHeight="25.0" prefWidth="47.0" promptText="Price" />
-      <Button fx:id="PriceBtn" layoutX="247.0" layoutY="537.0" mnemonicParsing="false" onAction="#onPriceBtnPressed" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: green;" text="Put a price">
-         <font>
-            <Font name="SansSerif Regular" size="14.0" />
-         </font>
-      </Button>
-      <Label fx:id="PriceWarningLabel" layoutX="19.0" layoutY="540.0" prefHeight="20.0" prefWidth="221.0" text="empty fields/id,hallname not found" textFill="#afbfea" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane prefHeight="800.0" prefWidth="1220.0" style="-fx-background-color: #0e1118;"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="FxmlControllers.AdminInterface">
+   <Label alignment="CENTER" layoutX="475.0" layoutY="14.0" prefHeight="17.0" prefWidth="270.0"
+          style="-fx-text-fill: #e77567;" text="Admin configuration" textFill="RED">
+      <font>
+         <Font name="SansSerif Regular" size="26.0"/>
+      </font>
+      <effect>
+         <Glow/>
+      </effect>
+   </Label>
+   <Label layoutX="36.0" layoutY="90.0" prefHeight="31.0" prefWidth="132.0" text="Upload a movie" textFill="#c8e5e3">
+      <font>
+         <Font size="18.0"/>
+      </font>
+      <effect>
+         <Glow/>
+      </effect>
+   </Label>
+   <TextField fx:id="UploadName" layoutX="36.0" layoutY="129.0" promptText="name">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="UploadImgPath" layoutX="36.0" layoutY="168.0" prefHeight="25.0" prefWidth="229.0"
+              promptText="photoPath">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="UploadRating" layoutX="199.0" layoutY="129.0" prefHeight="25.0" prefWidth="83.0"
+              promptText="IMDB rating">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextArea fx:id="UploadDesc" layoutX="36.0" layoutY="200.0" prefHeight="181.0" prefWidth="270.0"
+             promptText="description">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextArea>
+   <RadioButton fx:id="UploadView" layoutX="315.0" layoutY="282.0" mnemonicParsing="false" prefHeight="21.0"
+                prefWidth="132.0" text="VisibleToUsers" textFill="#4cd370">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </RadioButton>
+   <Button fx:id="UploadBtn" layoutX="315.0" layoutY="351.0" mnemonicParsing="false" onAction="#onUploadBtnPressed"
+           prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: green;" text="Upload">
+      <font>
+         <Font name="SansSerif Regular" size="14.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <TextField fx:id="UploadID" layoutX="275.0" layoutY="168.0" prefHeight="25.0" prefWidth="47.0" promptText="ID">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <Label fx:id="UpladWarningLabel" layoutX="332.0" layoutY="173.0" prefHeight="20.0" prefWidth="149.0"
+          text="ID exists / empty field" textFill="#afbfea" visible="false">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
+   <Label layoutX="491.0" layoutY="90.0" prefHeight="31.0" prefWidth="149.0" text="Add a movie hall" textFill="#c8e5e3">
+      <font>
+         <Font size="18.0"/>
+      </font>
+      <effect>
+         <Glow/>
+      </effect>
+   </Label>
+   <Line endX="4.000030517578125" endY="261.0" layoutX="471.0" layoutY="121.0" startX="4.0" startY="-33.333335876464844"
+         stroke="#f6ff00"/>
+   <TextField fx:id="HallName" layoutX="491.0" layoutY="129.0" promptText="HallName">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="HallSeats" layoutX="491.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0"
+              promptText="Amount of seats">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <Label layoutX="653.0" layoutY="174.0" text="Ex: 3x3" textFill="#00a1ff"/>
+   <Line endX="200.29290771484375" endY="-1.1666717529296875" layoutX="607.0" layoutY="235.0" startX="-133.5"
+         startY="1.52587890625E-5" stroke="#e5ff00"/>
+   <Button fx:id="HallAddBtn" layoutX="640.0" layoutY="200.0" mnemonicParsing="false" onAction="#onAddBtnPressed"
+           prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: green;" text="Add">
+      <font>
+         <Font name="SansSerif Regular" size="14.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Label layoutX="491.0" layoutY="240.0" prefHeight="31.0" prefWidth="256.0" text="Remove a movie from database"
+          textFill="#c8e5e3">
+      <font>
+         <Font size="18.0"/>
+      </font>
+      <effect>
+         <Glow/>
+      </effect>
+   </Label>
+   <TextField fx:id="RemoveID" layoutX="491.0" layoutY="278.0" prefHeight="25.0" prefWidth="47.0" promptText="ID">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <Button fx:id="RemoveBtn" layoutX="633.0" layoutY="303.0" mnemonicParsing="false" onAction="#onRemoveBtnPressed"
+           prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: green;" text="Remove">
+      <font>
+         <Font name="SansSerif Regular" size="14.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Label fx:id="RemoveWarningLabel" layoutX="546.0" layoutY="281.0" prefHeight="20.0" prefWidth="177.0"
+          text="ID not found / empty field" textFill="#afbfea" visible="false">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
+   <Label fx:id="HallWarningLabel" layoutX="645.0" layoutY="132.0" prefHeight="20.0" prefWidth="177.0"
+          text="Hall found \ empty field/s" textFill="#afbfea" visible="false">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
+   <Label layoutX="844.0" layoutY="90.0" prefHeight="31.0" prefWidth="103.0" text="Edit a movie" textFill="#c8e5e3">
+      <font>
+         <Font size="18.0"/>
+      </font>
+      <effect>
+         <Glow/>
+      </effect>
+   </Label>
+   <TextField fx:id="EditID" layoutX="947.0" layoutY="93.0" prefHeight="25.0" prefWidth="47.0" promptText="ID">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="EditName" layoutX="844.0" layoutY="129.0" promptText="name">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="EditRating" layoutX="1012.0" layoutY="129.0" prefHeight="25.0" prefWidth="83.0"
+              promptText="IMDB rating">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="EditPath" layoutX="844.0" layoutY="161.0" prefHeight="25.0" prefWidth="229.0"
+              promptText="photoPath">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextArea fx:id="EditDesc" layoutX="844.0" layoutY="191.0" prefHeight="181.0" prefWidth="270.0"
+             promptText="description">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextArea>
+   <Button fx:id="EditBtn" layoutX="1133.0" layoutY="351.0" mnemonicParsing="false" onAction="#onEditBtnPressed"
+           prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: green;" text="Edit">
+      <font>
+         <Font name="SansSerif Regular" size="14.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Line endX="4.000030517578125" endY="261.0" layoutX="804.0" layoutY="120.0" startX="4.0" startY="-33.333335876464844"
+         stroke="#f6ff00"/>
+   <Label fx:id="EditWarningLabel" layoutX="1009.0" layoutY="96.0" text="ID not found" textFill="#afbfea"
+          visible="false">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
+   <RadioButton fx:id="EditView" layoutX="1122.0" layoutY="267.0" mnemonicParsing="false" prefHeight="21.0"
+                prefWidth="132.0" text="VisibleToUsers" textFill="#4cd370">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </RadioButton>
+   <Label layoutX="35.0" layoutY="432.0" prefHeight="31.0" prefWidth="170.0" text="Put price on a movie"
+          textFill="#c8e5e3">
+      <font>
+         <Font size="18.0"/>
+      </font>
+      <effect>
+         <Glow/>
+      </effect>
+   </Label>
+   <TextField fx:id="PriceMovieID" layoutX="35.0" layoutY="463.0" prefHeight="25.0" prefWidth="79.0"
+              promptText="ID of Movie">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="PriceHallName" layoutX="36.0" layoutY="498.0" promptText="HallName">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="PriceTime" layoutX="205.0" layoutY="498.0" prefHeight="25.0" prefWidth="95.0"
+              promptText="Start-End (time)">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <TextField fx:id="Price" layoutX="205.0" layoutY="463.0" prefHeight="25.0" prefWidth="47.0" promptText="Price">
+      <cursor>
+         <Cursor fx:constant="TEXT"/>
+      </cursor>
+   </TextField>
+   <Button fx:id="PriceBtn" layoutX="247.0" layoutY="537.0" mnemonicParsing="false" onAction="#onPriceBtnPressed"
+           prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: green;" text="Put a price">
+      <font>
+         <Font name="SansSerif Regular" size="14.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Button>
+   <Label fx:id="PriceWarningLabel" layoutX="19.0" layoutY="540.0" prefHeight="20.0" prefWidth="221.0"
+          text="empty fields/id,hallname not found" textFill="#afbfea" visible="false">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
 </AnchorPane>
