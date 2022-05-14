@@ -1,12 +1,11 @@
 package FxmlControllers;
 
-import Json.TktJson;
+import IO.JsonIO;
 import Sql.DataBase;
-import Sql.EntrySearch;
 import Sql.InfoCreds;
-import Sql.Initialization;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -15,8 +14,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AdminInterface {
     @FXML
@@ -77,13 +75,21 @@ public class AdminInterface {
     private Button PriceBtn;
     @FXML
     private Label PriceWarningLabel;
+    @FXML
+    private Button outBtn;
+    @FXML
+    private Button ResetBtn;
+    @FXML
+    private TextField ResetHall;
+    @FXML
+    private Label ResetHallWarning;
 
     @FXML
     //here i do not check if other fields except id is filled since it can be edited.
     public void onUploadBtnPressed() throws IOException {
-        if (!TktJson.movieExists(UploadID.getText()) && UploadID.getText().length() > 0) {
+        if (!JsonIO.movieExists(UploadID.getText()) && UploadID.getText().length() > 0) {
             UpladWarningLabel.setVisible(false);
-            TktJson.addJson(UploadName.getText(), UploadImgPath.getText(),
+            JsonIO.addJson(UploadName.getText(), UploadImgPath.getText(),
                     UploadRating.getText(), UploadDesc.getText(), String.valueOf(UploadView.isSelected()), UploadID.getText());
 
         } else {
@@ -92,11 +98,11 @@ public class AdminInterface {
     }
 
     public void onRemoveBtnPressed() throws IOException {
-        if (TktJson.movieExists(RemoveID.getText()) && RemoveID.getText().length() > 0) {
+        if (JsonIO.movieExists(RemoveID.getText()) && RemoveID.getText().length() > 0) {
             RemoveWarningLabel.setVisible(false);
-            ArrayList<JSONObject> arr = TktJson.getJsonList();
+            ArrayList<JSONObject> arr = JsonIO.getJsonList();
             arr.removeIf(json -> json.containsValue(RemoveID.getText()));
-            TktJson.updateJson(arr);
+            JsonIO.updateJson(arr);
             System.out.println("DEBUG: REMOVED JSON");
         } else {
             RemoveWarningLabel.setVisible(true);
@@ -107,17 +113,26 @@ public class AdminInterface {
         if (!DataBase.hallExists(HallName.getText()) && HallName.getText().length() > 0 && HallSeats.getText().length() > 0) {
             HallWarningLabel.setVisible(false);
             Connection con = DriverManager.getConnection(InfoCreds.HOST, InfoCreds.USER, InfoCreds.PASSWORD);
-            con.prepareStatement("INSERT INTO `tkt`.`moviehalls` (`name`, `seats`) VALUES ('%s', '%s');".formatted(HallName.getText(), HallSeats.getText())).execute();
+            JSONObject json = createFreshJson(HallSeats.getText().split("x")[0],
+                                            (HallSeats.getText().split("x")[1]));
+            con.prepareStatement("INSERT INTO `tkt`.`moviehalls` (`name`, `seats`,`json`) VALUES ('%s', '%s', '%s');".formatted(HallName.getText(), HallSeats.getText(), json.toJSONString())).execute();
             System.out.println("DEBUG: ADDED ROW INTO MOVIEHALLS");
         } else {
             HallWarningLabel.setVisible(true);
         }
     }
 
+    private JSONObject createFreshJson(String x, String y) {
+        JSONObject json = new JSONObject();
+        IntStream.range(1, (Integer.parseInt(x) *  Integer.parseInt(y) + 1)).forEach(
+                e -> json.put(String.valueOf(e), "true"));
+        return json;
+    }
+
     public void onEditBtnPressed() throws IOException {
-        if (TktJson.movieExists(EditID.getText())) {
+        if (JsonIO.movieExists(EditID.getText())) {
             EditWarningLabel.setVisible(false);
-            ArrayList<JSONObject> arr = TktJson.getJsonList();
+            ArrayList<JSONObject> arr = JsonIO.getJsonList();
             JSONObject json = arr.stream().filter(e -> e.containsValue(EditID.getText())).findFirst().get();
             //if statements has to be done manually
             //RADIOBUTTON ALWAYS CHANGES REGARDLESS SO KEEP IT SYNCED.
@@ -139,7 +154,7 @@ public class AdminInterface {
 
             arr.remove(arr.stream().filter(e -> e.containsValue(EditID.getText())).findFirst().get());
             arr.add(json);
-            TktJson.updateJson(arr);
+            JsonIO.updateJson(arr);
             System.out.println("DEBUG: EDITED JSON");
         } else {
             EditWarningLabel.setVisible(true);
@@ -152,11 +167,30 @@ public class AdminInterface {
             PriceWarningLabel.setVisible(false);
             Connection con = DriverManager.getConnection(InfoCreds.HOST, InfoCreds.USER, InfoCreds.PASSWORD);
             con.prepareStatement("INSERT INTO `tkt`.`prices` (`idofmovie`,`nameofhall`,`price`,`time`) VALUES(\"%s\",\"%s\",\"%s\",\"%s\")"
-                    .formatted(PriceMovieID.getText(), PriceHallName.getText(),Price.getText(),PriceTime.getText())).execute();
+                    .formatted(PriceMovieID.getText(), PriceHallName.getText(), Price.getText(), PriceTime.getText())).execute();
             System.out.println("DEBUG: ADDED PRICE TO MOVIE");
         } else {
             PriceWarningLabel.setVisible(true);
         }
+    }
+
+    public void onResetBtnPressed() throws SQLException {
+        if (!DataBase.hallExists(ResetHall.getText())){
+            ResetHallWarning.setText("Hall not found/empty field");
+            ResetHallWarning.setVisible(true);
+            return;
+        }
+        ResetHallWarning.setText("Done!");
+        ResetHallWarning.setVisible(true);
+        String dimension = DataBase.getHallSeats(ResetHall.getText());
+        String row = dimension.split("x")[0];
+        String col = dimension.split("x")[1];
+        DataBase.updateJsonSeat(createFreshJson(row,col), ResetHall.getText());
+        System.out.printf("DEBUG: RESET %s%n", ResetHall.getText());
+    }
+
+    public void onOutPressed() {
+        new EntryPoint().openFxml("/EntryPoint.fxml", (Stage) outBtn.getScene().getWindow());
     }
 }
 

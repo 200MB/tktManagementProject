@@ -1,15 +1,14 @@
-package Json;
+package IO;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.beans.JavaBean;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class TktJson {
+public class JsonIO {
 
 
     public static boolean movieExists(String id) {
@@ -38,7 +37,7 @@ public class TktJson {
 
     //movies that can be viewed to user interface
     public static ArrayList<JSONObject> getJsonListForUsers() {
-        return (ArrayList<JSONObject>) getJsonList().stream().filter(e->e.get("Show").equals("true")).collect(Collectors.toList());
+        return (ArrayList<JSONObject>) getJsonList().stream().filter(e -> e.get("Show").equals("true")).collect(Collectors.toList());
     }
 
     @SuppressWarnings("unchecked")
@@ -79,4 +78,5 @@ public class TktJson {
         }
         writer.close();
     }
+
 }

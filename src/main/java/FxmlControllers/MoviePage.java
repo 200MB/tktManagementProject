@@ -2,7 +2,6 @@ package FxmlControllers;
 
 import Models.PriceTable;
 import Sql.DataBase;
-import com.mysql.cj.protocol.Resultset;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -33,13 +33,15 @@ public class MoviePage implements Initializable {
     @FXML
     private Button PageTableBtn;
     @FXML
-    private TableView PageTable;
+    private Button outBtn;
     @FXML
-    private TableColumn hallColumn;
+    private TableView<PriceTable> PageTable;
     @FXML
-    private TableColumn priceColumn;
+    private TableColumn<PriceTable, String> hallColumn;
     @FXML
-    private TableColumn timeColumn;
+    private TableColumn<PriceTable, String> priceColumn;
+    @FXML
+    private TableColumn<PriceTable, String> timeColumn;
 
     public static String id;
     public static String name;
@@ -56,7 +58,8 @@ public class MoviePage implements Initializable {
         initializeTable(PageTable);
     }
 
-    private void initializeTable(TableView table) {
+    private void initializeTable(TableView<PriceTable> table) {
+        doubleClickOnTheTableView();
         ObservableList<PriceTable> obList = FXCollections.observableArrayList();
         try {
             ResultSet set = DataBase.getPrices(id);
@@ -80,9 +83,26 @@ public class MoviePage implements Initializable {
     }
 
     private void setCells() {
-        hallColumn.setCellValueFactory(new PropertyValueFactory<PriceTable, String>("hallname"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<PriceTable, String>("price"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<PriceTable, String>("time"));
+        hallColumn.setCellValueFactory(new PropertyValueFactory<>("hallname"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
     }
+
+    private void doubleClickOnTheTableView() {
+        PageTable.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getClickCount() == 2) {
+                int index = PageTable.getSelectionModel().getSelectedIndex();
+                PriceTable row = PageTable.getItems().get(index);
+                SeatVision.dimension = DataBase.getHallSeats(row.getHallname());
+                SeatVision.hallName = row.getHallname();
+                SeatVision.price = row.getPrice();
+                new EntryPoint().openFxml("/SeatVision.fxml", (Stage) PageTable.getScene().getWindow());
+            }
+        });
+    }
+    public void onOutPressed() {
+        new EntryPoint().openFxml("/UserInterface.fxml", (Stage) outBtn.getScene().getWindow());
+    }
+
 }
 

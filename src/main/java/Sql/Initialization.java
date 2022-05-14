@@ -40,18 +40,16 @@ public class Initialization {
                     CREATE TABLE `tkt`.`userinfo` (
                       `iduserinfo` INT NOT NULL,
                       `name` VARCHAR(45) NOT NULL,
-                      `balance` VARCHAR(45) NOT NULL,
-                      PRIMARY KEY (`iduserinfo`));
+                      `balance` VARCHAR(45) NOT NULL);
                     """).execute();
             System.out.println("DEBUG: CREATED TABLE USERINFO");
         }
         if (tableCheck("tickethistory")) {
             connection.prepareStatement("""
                     CREATE TABLE `tkt`.`tickethistory` (
-                      `date` VARCHAR(45) NOT NULL,
-                      `price` INT NOT NULL,
-                      `moviename` VARCHAR(45) NULL);
-                    """).execute();
+                      `userid` VARCHAR(45) NULL,
+                      `price` VARCHAR(45) NULL,
+                      `moviename` VARCHAR(45) NULL);""").execute();
             System.out.println("DEBUG: CREATED TABLE TICKETHISTORY");
         }
         if (tableCheck("moviehalls")){
@@ -60,6 +58,7 @@ public class Initialization {
                       `idmoviehalls` INT NOT NULL AUTO_INCREMENT,
                       `name` VARCHAR(45) NULL,
                       `seats` VARCHAR(45) NULL,
+                      `json` VARCHAR(45) NULL,
                       PRIMARY KEY (`idmoviehalls`));""").execute();
             System.out.println("DEBUG: CREATED TABLE MOVIEHALLS");
         }

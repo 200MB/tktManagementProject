@@ -25,14 +25,6 @@
             <Font name="SansSerif Regular" size="18.0" />
         </font>
     </Label>
-    <Button fx:id="PageTableBtn" layoutX="1185.0" layoutY="358.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="92.0" text="Book seats" textAlignment="JUSTIFY">
-        <cursor>
-            <Cursor fx:constant="HAND" />
-        </cursor>
-        <font>
-            <Font size="15.0" />
-        </font>
-    </Button>
     <TableView fx:id="PageTable" editable="true" layoutX="792.0" layoutY="207.0" prefHeight="143.0" prefWidth="485.0" style="-fx-background-color: transparent;">
         <columns>
             <TableColumn fx:id="hallColumn" prefWidth="160.66668701171875" resizable="false" text="Hall" />
@@ -54,4 +46,12 @@
             </Lighting>
         </effect>
     </TableView>
+   <Button fx:id="outBtn" layoutX="1185.0" layoutY="350.0" mnemonicParsing="false" onAction="#onOutPressed" prefHeight="29.0" prefWidth="92.0" text="Back" textAlignment="JUSTIFY">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
 </AnchorPane>

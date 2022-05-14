@@ -32,6 +32,7 @@ public class EntryPoint {
     private Label hdnLabelLogin;
     @FXML
     private Label hdnLabelReg;
+
     @FXML
     public void onLoginPressed() throws IOException {
         Stage stage = (Stage) LoginBtn.getScene().getWindow();
@@ -43,6 +44,9 @@ public class EntryPoint {
             if (EntrySearch.getID(email) == 1) {
                 openAdminInterface(stage);
             } else {
+                UserInterface.balance = DataBase.getUserBalance(email);
+                UserInterface.name = DataBase.getUserName(email);
+                UserInterface.id = String.valueOf(EntrySearch.getID(email));
                 openUserInterface(stage);
             }
 
@@ -67,15 +71,21 @@ public class EntryPoint {
     }
 
     private void openUserInterface(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/UserInterface.fxml")));
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.show();
+        new EntryPoint().openFxml("/UserInterface.fxml", stage);
     }
 
     private void openAdminInterface(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AdminInterface.fxml")));
+        new EntryPoint().openFxml("/AdminInterface.fxml", stage);
+    }
+
+
+    public void openFxml(String url, Stage stage) {
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("%s".formatted(url))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.setMaximized(true);

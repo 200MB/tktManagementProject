@@ -1,4 +1,4 @@
-import Json.TktJson;
+import Sql.DataBase;
 import Sql.Initialization;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,14 +6,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.*;
 import java.sql.SQLException;
 
 public class Main extends Application {
-    //todo:onClickEvent for column,seat page,balance fill
-    public static void main(String[] args) throws SQLException, IOException {
+    //todo:balance fill
+    public static void main(String[] args) throws SQLException {
         Initialization.startup();
         launch(args);
+
     }
 
     @Override

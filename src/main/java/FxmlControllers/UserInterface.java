@@ -1,15 +1,11 @@
 package FxmlControllers;
 
-import Json.TktJson;
+import IO.JsonIO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -17,24 +13,28 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserInterface implements Initializable {
     @FXML
     private Button UserProfile;
     @FXML
+    private Button outBtn;
+    @FXML
     private ScrollPane UserSP;
-    private TilePane UserTilePane = new TilePane();
+    private final TilePane UserTilePane = new TilePane();
+
+    public static String name;
+    public static String balance;
+    public static String id;
 
     private final int rows = 4;
     private final int cols = 3;
 
     private int count = 0;
-    private final ArrayList<JSONObject> arr = TktJson.getJsonListForUsers();
+    private final ArrayList<JSONObject> arr = JsonIO.getJsonListForUsers();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +47,6 @@ public class UserInterface implements Initializable {
             }
         }
         setScrollpane();
-
     }
 
     private void setTilePane() {
@@ -67,7 +66,7 @@ public class UserInterface implements Initializable {
     }
 
     private VBox convertToImage(int count) {
-        
+
         Label name = new Label();
         name.setText(String.valueOf(arr.get(count).get("Name")));
         name.setTextFill(Paint.valueOf("Yellow"));
@@ -84,25 +83,19 @@ public class UserInterface implements Initializable {
         box.getChildren().add(view);
         box.setId(String.valueOf(arr.get(count).get("id")));
         box.setOnMouseClicked(mouseEvent -> {
-            JSONObject obj = TktJson.getJsonListForUsers().stream().filter(e -> e.get("id").equals(box.getId())).findFirst().get();
+            JSONObject obj = JsonIO.getJsonListForUsers().stream().filter(e -> e.get("id").equals(box.getId())).findFirst().get();
             MoviePage.id = (String) obj.get("id");
             MoviePage.name = (String) obj.get("Name");
             MoviePage.desc = (String) obj.get("Description");
             MoviePage.rating = (String) obj.get("Rating");
             MoviePage.url = (String) obj.get("Url");
-            Parent parent = null;
-            try {
-                parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MoviePage.fxml")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Stage stage = (Stage) box.getScene().getWindow();
-            Scene scene = new Scene(Objects.requireNonNull(parent));
-            stage.setScene(scene);
-            stage.setMaximized(true);
-            stage.show();
+
+            new EntryPoint().openFxml("/MoviePage.fxml", (Stage) box.getScene().getWindow());
 
         });
         return box;
+    }
+    public void onOutPressed() {
+        new EntryPoint().openFxml("/EntryPoint.fxml", (Stage) outBtn.getScene().getWindow());
     }
 }

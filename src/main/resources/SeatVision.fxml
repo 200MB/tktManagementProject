@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="470.0" prefWidth="1245.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FxmlControllers.SeatVision">
+    <GridPane fx:id="seatGrid" gridLinesVisible="true" layoutX="9.0" layoutY="20.0" prefHeight="447.0" prefWidth="843.0" />
+   <ScrollPane fx:id="cartSP" layoutX="897.0" layoutY="358.0" prefHeight="46.0" prefWidth="316.0" style="-fx-background-color: black; -fx-border-color: black;" />
+   <Button fx:id="seatBuy" layoutX="1125.0" layoutY="415.0" mnemonicParsing="false" onAction="#onSeatBuyBtnPressed" prefHeight="28.0" prefWidth="87.0" style="-fx-border-color: blue; -fx-background-color: transparent; -fx-text-fill: blue; -fx-border-insets: 3;" text="Buy seats">
+      <font>
+         <Font size="14.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></Button>
+   <Label fx:id="total" layoutX="897.0" layoutY="417.0" prefHeight="35.0" prefWidth="218.0" text="Total:" textFill="#6207ff">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Label alignment="CENTER" layoutX="868.0" layoutY="53.0" prefHeight="46.0" prefWidth="294.0" style="-fx-border-color: green; -fx-border-radius: 5;" text="Double left click to book" textFill="#1dff34">
+      <font>
+         <Font size="23.0" />
+      </font>
+   </Label>
+   <Label alignment="CENTER" layoutX="870.0" layoutY="114.0" prefHeight="46.0" prefWidth="294.0" style="-fx-border-color: red; -fx-border-radius: 5;" text="Double right click to undo" textFill="#e11111">
+      <font>
+         <Font size="23.0" />
+      </font>
+   </Label>
+   <Button fx:id="seatBuy1" layoutX="1132.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBackBtnPressed" prefHeight="28.0" prefWidth="87.0" style="-fx-border-color: blue; -fx-background-color: transparent; -fx-text-fill: blue; -fx-border-insets: 3;" text="Back">
+      <font>
+         <Font size="14.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+</AnchorPane>
