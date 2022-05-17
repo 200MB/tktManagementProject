@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class JsonIO {
@@ -77,6 +78,17 @@ public class JsonIO {
             writer.append(obj.toJSONString()).append("\n");
         }
         writer.close();
+    }
+
+    public static String getNextAvailableID() {
+        int id = 0;
+        ArrayList<JSONObject> obj = getJsonListForUsers();
+        for (JSONObject json : obj) {
+            if (Integer.parseInt((String) json.get("id")) > id) {
+                id = Integer.parseInt((String) json.get("id"));
+            }
+        }
+        return String.valueOf(id + 1);
     }
 
 }

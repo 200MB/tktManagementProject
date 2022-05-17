@@ -62,7 +62,7 @@
          <Cursor fx:constant="TEXT" />
       </cursor>
    </TextField>
-   <Label fx:id="UpladWarningLabel" layoutX="332.0" layoutY="173.0" prefHeight="20.0" prefWidth="149.0" text="ID exists / empty field" textFill="#afbfea" visible="false">
+   <Label fx:id="UpladWarningLabel" layoutX="322.0" layoutY="224.0" prefHeight="20.0" prefWidth="149.0" text="ID exists / empty field" textFill="#afbfea" visible="false">
       <font>
          <Font size="14.0" />
       </font>
@@ -254,4 +254,12 @@
          <Font size="14.0" />
       </font>
    </Label>
+   <Button fx:id="NextID" layoutX="329.0" layoutY="168.0" mnemonicParsing="false" onAction="#onNextIDBtnPressed" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: green;" text="Next ID">
+      <font>
+         <Font name="SansSerif Regular" size="14.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
 </AnchorPane>

@@ -47,18 +47,20 @@ public class Initialization {
         if (tableCheck("tickethistory")) {
             connection.prepareStatement("""
                     CREATE TABLE `tkt`.`tickethistory` (
-                      `userid` VARCHAR(45) NULL,
+                      `userid` VARCHAR(45) NOT NULL,
                       `price` VARCHAR(45) NULL,
+                      `hallname` VARCHAR(45) NULL,
                       `moviename` VARCHAR(45) NULL);""").execute();
             System.out.println("DEBUG: CREATED TABLE TICKETHISTORY");
         }
+        //name of the hall,dimension of seats, and a json containing values of occupied seats
         if (tableCheck("moviehalls")){
             connection.prepareStatement("""
                     CREATE TABLE `tkt`.`moviehalls` (
                       `idmoviehalls` INT NOT NULL AUTO_INCREMENT,
                       `name` VARCHAR(45) NULL,
                       `seats` VARCHAR(45) NULL,
-                      `json` VARCHAR(45) NULL,
+                      `json` VARCHAR(1000) NULL,
                       PRIMARY KEY (`idmoviehalls`));""").execute();
             System.out.println("DEBUG: CREATED TABLE MOVIEHALLS");
         }

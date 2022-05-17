@@ -71,6 +71,7 @@ public class MoviePage implements Initializable {
         table.setItems(obList);
     }
 
+
     private ArrayList<PriceTable> getData(ResultSet set) throws SQLException {
         ArrayList<PriceTable> arr = new ArrayList<>();
         while (set.next()) {
@@ -88,6 +89,7 @@ public class MoviePage implements Initializable {
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
     }
 
+    //adds event listener to a table which will open to seatvision fxml
     private void doubleClickOnTheTableView() {
         PageTable.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getClickCount() == 2) {

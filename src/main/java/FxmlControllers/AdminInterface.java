@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,8 +88,8 @@ public class AdminInterface {
     @FXML
     //here i do not check if other fields except id is filled since it can be edited.
     public void onUploadBtnPressed() throws IOException {
+        UpladWarningLabel.setVisible(false);
         if (!JsonIO.movieExists(UploadID.getText()) && UploadID.getText().length() > 0) {
-            UpladWarningLabel.setVisible(false);
             JsonIO.addJson(UploadName.getText(), UploadImgPath.getText(),
                     UploadRating.getText(), UploadDesc.getText(), String.valueOf(UploadView.isSelected()), UploadID.getText());
 
@@ -114,17 +115,22 @@ public class AdminInterface {
             HallWarningLabel.setVisible(false);
             Connection con = DriverManager.getConnection(InfoCreds.HOST, InfoCreds.USER, InfoCreds.PASSWORD);
             JSONObject json = createFreshJson(HallSeats.getText().split("x")[0],
-                                            (HallSeats.getText().split("x")[1]));
-            con.prepareStatement("INSERT INTO `tkt`.`moviehalls` (`name`, `seats`,`json`) VALUES ('%s', '%s', '%s');".formatted(HallName.getText(), HallSeats.getText(), json.toJSONString())).execute();
+                    (HallSeats.getText().split("x")[1]));
+            PreparedStatement pre = con.prepareStatement("INSERT INTO `tkt`.`moviehalls` (`name`, `seats`,`json`) VALUES (?,?,?);");
+            pre.setString(1,HallName.getText());
+            pre.setString(2,HallSeats.getText());
+            pre.setString(3, json.toJSONString());
+            pre.execute();
             System.out.println("DEBUG: ADDED ROW INTO MOVIEHALLS");
         } else {
             HallWarningLabel.setVisible(true);
         }
+
     }
 
     private JSONObject createFreshJson(String x, String y) {
         JSONObject json = new JSONObject();
-        IntStream.range(1, (Integer.parseInt(x) *  Integer.parseInt(y) + 1)).forEach(
+        IntStream.range(1, (Integer.parseInt(x) * Integer.parseInt(y) + 1)).forEach(
                 e -> json.put(String.valueOf(e), "true"));
         return json;
     }
@@ -175,7 +181,7 @@ public class AdminInterface {
     }
 
     public void onResetBtnPressed() throws SQLException {
-        if (!DataBase.hallExists(ResetHall.getText())){
+        if (!DataBase.hallExists(ResetHall.getText())) {
             ResetHallWarning.setText("Hall not found/empty field");
             ResetHallWarning.setVisible(true);
             return;
@@ -185,8 +191,12 @@ public class AdminInterface {
         String dimension = DataBase.getHallSeats(ResetHall.getText());
         String row = dimension.split("x")[0];
         String col = dimension.split("x")[1];
-        DataBase.updateJsonSeat(createFreshJson(row,col), ResetHall.getText());
+        DataBase.updateJsonSeat(createFreshJson(row, col), ResetHall.getText());
         System.out.printf("DEBUG: RESET %s%n", ResetHall.getText());
+    }
+
+    public void onNextIDBtnPressed() {
+        UploadID.setText(JsonIO.getNextAvailableID());
     }
 
     public void onOutPressed() {

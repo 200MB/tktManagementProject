@@ -101,12 +101,29 @@ public class DataBase {
         return null;
     }
 
-    public static void recordTransaction(String id, String name, String price) {
+    public static void recordTransaction(String id, String price, String hall, String name) {
         try {
-            Initialization.connection.prepareStatement("INSERT INTO tkt.tickethistory VALUES(\"%s\",\"%s\",\"%s\")".formatted(id,price,name)).execute();
+            Initialization.connection.prepareStatement("INSERT INTO tkt.tickethistory VALUES(\"%s\",\"%s\",\"%s\",\"%s\")".formatted(id, price, hall, name)).execute();
             System.out.println("DEBUG: UPDATED RECORD");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static void updateBalance(String id, String balance) {
+        try {
+            Initialization.connection.prepareStatement("UPDATE tkt.userinfo SET balance = \"%s\" where iduserinfo = \"%s\"".formatted(balance, id)).execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static ResultSet getTransactionHistory(String id) {
+        try {
+            return Initialization.connection.prepareStatement("SELECT * FROM `tkt`.`tickethistory` WHERE userid = \"%s\"".formatted(id)).executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

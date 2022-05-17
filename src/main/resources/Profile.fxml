@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="530.0" prefWidth="864.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FxmlControllers.Profile">
+   <children>
+      <Label fx:id="userNameLb" layoutX="105.0" layoutY="38.0" prefHeight="41.0" prefWidth="132.0" text="Name" textFill="#f01d1d">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="userBalanceLb" layoutX="105.0" layoutY="105.0" text="Balance" textFill="RED">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="351.0" layoutY="163.0" text="Purchase History" textFill="RED">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="206.0" layoutY="207.0" prefHeight="162.0" prefWidth="473.0" style="-fx-background-color: transparent;">
+         <columns>
+            <TableColumn fx:id="nameCol" prefWidth="146.33334732055664" text="Name" />
+            <TableColumn fx:id="hallCol" prefWidth="173.99998474121094" text="Hall" />
+            <TableColumn fx:id="priceCol" prefWidth="152.00003051757812" text="Price" />
+         </columns>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </TableView>
+      <Button fx:id="backBtn" layoutX="772.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackBtnPressed" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: transparent; -fx-border-color: red; -fx-border-radius: 5;" text="Back" textFill="#ff2b00">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="105.0" layoutY="361.0" prefHeight="27.0" prefWidth="132.0" text="UpdateBalance" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="balanceInput" layoutX="105.0" layoutY="388.0" style="-fx-background-color: transparent; -fx-border-color: red; -fx-background-radius: 10;">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <Button fx:id="updateBtn" layoutX="105.0" layoutY="426.0" mnemonicParsing="false" onAction="#balanceUpdate" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: transparent; -fx-border-color: red; -fx-border-radius: 5;" text="Update" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="refillTxt" layoutX="286.0" layoutY="388.0" prefHeight="27.0" prefWidth="132.0" text="Refilled!" textFill="RED" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

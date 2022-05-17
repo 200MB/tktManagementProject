@@ -9,11 +9,10 @@ import javafx.stage.StageStyle;
 import java.sql.SQLException;
 
 public class Main extends Application {
-    //todo:balance fill
+
     public static void main(String[] args) throws SQLException {
         Initialization.startup();
         launch(args);
-
     }
 
     @Override

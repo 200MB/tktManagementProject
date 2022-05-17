@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="1920.0" prefWidth="1080.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FxmlControllers.UserInterface">
    <children>
-      <Button fx:id="UserProfile" contentDisplay="CENTER" layoutX="1032.0" layoutY="14.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="114.0" style="-fx-text-fill: a92; -fx-background-color: black;" text="Profile" textFill="#2d3971">
+      <Button fx:id="UserProfile" contentDisplay="CENTER" layoutX="1016.0" layoutY="11.0" mnemonicParsing="false" onAction="#onUserProfileBtnPressed" prefHeight="29.0" prefWidth="114.0" style="-fx-text-fill: a92; -fx-background-color: black; -fx-border-color: orange; -fx-border-radius: 5; -fx-border-width: 1;" text="Profile" textFill="#2d3971">
          <opaqueInsets>
             <Insets bottom="3.0" left="4.0" right="2.0" top="1.0" />
          </opaqueInsets>
          <font>
             <Font size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <ScrollPane fx:id="UserSP" layoutY="43.0" prefHeight="608.0" prefWidth="1271.0" style="-fx-background-color: black; -fx-border-color: black;" />
-      <Button fx:id="outBtn" contentDisplay="CENTER" layoutX="1146.0" layoutY="14.0" mnemonicParsing="false" onAction="#onOutPressed" prefHeight="29.0" prefWidth="114.0" style="-fx-text-fill: a92; -fx-background-color: black;" text="Log Out" textFill="#2d3971">
+      <Button fx:id="outBtn" contentDisplay="CENTER" layoutX="1146.0" layoutY="11.0" mnemonicParsing="false" onAction="#onOutPressed" prefHeight="29.0" prefWidth="114.0" style="-fx-text-fill: a92; -fx-background-color: black; -fx-border-color: orange; -fx-border-radius: 5;" text="Log Out" textFill="#2d3971">
          <opaqueInsets>
             <Insets bottom="3.0" left="4.0" right="2.0" top="1.0" />
          </opaqueInsets>
          <font>
             <Font size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>

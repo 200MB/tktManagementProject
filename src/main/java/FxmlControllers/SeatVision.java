@@ -1,6 +1,7 @@
 package FxmlControllers;
 
 import Sql.DataBase;
+import Sql.EntrySearch;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -14,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 
 import java.util.ArrayList;
@@ -29,6 +31,10 @@ public class SeatVision implements Initializable {
     private Button seatBuy;
     @FXML
     private Label total;
+    @FXML
+    private Label response;
+    @FXML
+    private Label balanceLabel;
 
     private TextArea txt = new TextArea();
     private int totalPrice = 0;
@@ -53,6 +59,7 @@ public class SeatVision implements Initializable {
         String[] arr = dimension.split("x");
         rows = Integer.parseInt(arr[0]);
         cols = Integer.parseInt(arr[1]);
+        balanceLabel.setText("Balance:" + balance + "$");
     }
 
     private void setStyles() {
@@ -61,6 +68,7 @@ public class SeatVision implements Initializable {
         cartSP.setStyle("-fx-background: black");
     }
 
+    //sets up a GridPane and adds an eventListener to each stack added to a GridPane cell
     private void setGridPane(GridPane seatGrid) {
         seatGrid.setGridLinesVisible(false);
         for (int i = 0; i < cols; i++) {
@@ -124,14 +132,26 @@ public class SeatVision implements Initializable {
 
     }
 
+    //Updates User balance,Records transaction, and stores information in Transaction history
     public void onSeatBuyBtnPressed() {
         if (Integer.parseInt(balance) >= totalPrice && marks.size() > 0) {
             occupySeats();
-            DataBase.recordTransaction(UserInterface.id, hallName, price);
+            DataBase.recordTransaction(UserInterface.id, price, hallName, MoviePage.name);
+            balanceLabel.setText("Balance:" + (Integer.parseInt(balance) - totalPrice));
+            balance = String.valueOf(Integer.parseInt(balance) - totalPrice); //in case user decides to buy more on same page
+            UserInterface.balance = balance; //in case user goes back to userinterface and reopens the page again.
+            DataBase.updateBalance(UserInterface.id, balance);
+            response.setText("Accepted!");
+            response.setStyle("-fx-text-fill:green");
+        } else {
+            response.setText("Declined!");
+            response.setStyle("-fx-text-fill:red");
         }
+        response.setVisible(true);
 
     }
 
+    //updates database containing a Json which contains information about GridView
     private void occupySeats() {
         for (Node node : seatGrid.getChildren()) {
             if (node.getId() != null && marks.contains(Integer.parseInt(node.getId()))) {

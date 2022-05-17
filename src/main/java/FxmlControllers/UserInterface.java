@@ -65,12 +65,14 @@ public class UserInterface implements Initializable {
         UserSP.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);    // Vertical scroll bar
     }
 
+    //creates and styles Label,ImageView and adds it in Vbox. gives the Vbox same id as movieID.
+    //on double click it opens MoviePage fxml
     private VBox convertToImage(int count) {
 
         Label name = new Label();
         name.setText(String.valueOf(arr.get(count).get("Name")));
         name.setTextFill(Paint.valueOf("Yellow"));
-        name.setStyle("-fx-font-size:15; -fx-font-family:sansserif;");
+        name.setStyle("-fx-font-size:16; -fx-font-family:sansserif;");
         ImageView view = new ImageView();
         view.setFitHeight(450);
         view.setFitWidth(320);
@@ -95,6 +97,13 @@ public class UserInterface implements Initializable {
         });
         return box;
     }
+
+    public void onUserProfileBtnPressed() {
+        Profile.userName = name;
+        Profile.userBalance = balance;
+        new EntryPoint().openFxml("/Profile.fxml", (Stage) outBtn.getScene().getWindow());
+    }
+
     public void onOutPressed() {
         new EntryPoint().openFxml("/EntryPoint.fxml", (Stage) outBtn.getScene().getWindow());
     }

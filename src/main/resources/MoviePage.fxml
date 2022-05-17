@@ -9,7 +9,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1804.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FxmlControllers.MoviePage">
-    <ImageView fx:id="PageImage" fitHeight="488.0" fitWidth="332.0" layoutX="41.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="PageImage" fitHeight="630.0" fitWidth="338.0" layoutX="-7.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
     <Label fx:id="PageDescription" layoutX="384.0" layoutY="277.0" prefHeight="272.0" prefWidth="380.0" style="-fx-background-color: black; -fx-text-fill: yellow;" textAlignment="CENTER" wrapText="true">
         <font>
             <Font name="SansSerif Regular" size="17.0" />
@@ -46,12 +46,15 @@
             </Lighting>
         </effect>
     </TableView>
-   <Button fx:id="outBtn" layoutX="1185.0" layoutY="350.0" mnemonicParsing="false" onAction="#onOutPressed" prefHeight="29.0" prefWidth="92.0" text="Back" textAlignment="JUSTIFY">
+   <Button fx:id="outBtn" layoutX="1185.0" layoutY="350.0" mnemonicParsing="false" onAction="#onOutPressed" prefHeight="29.0" prefWidth="92.0" style="-fx-border-color: blue; -fx-background-color: transparent; -fx-text-fill: blue; -fx-border-radius: 5;" text="Back" textAlignment="JUSTIFY">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
       <font>
          <Font size="15.0" />
       </font>
+      <effect>
+         <Glow level="0.33" />
+      </effect>
    </Button>
 </AnchorPane>
