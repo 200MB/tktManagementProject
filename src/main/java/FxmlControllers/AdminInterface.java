@@ -86,7 +86,7 @@ public class AdminInterface {
     private Label ResetHallWarning;
 
     @FXML
-    //here i do not check if other fields except id is filled since it can be edited.
+    //here i do not check if other fields (except id) is filled since it can be edited.
     public void onUploadBtnPressed() throws IOException {
         UpladWarningLabel.setVisible(false);
         if (!JsonIO.movieExists(UploadID.getText()) && UploadID.getText().length() > 0) {
